@@ -74,14 +74,18 @@ def moveb_m(state, goal):
     for b in state.pos:
         if state.pos[b] == goal.pos[b]:
             continue
-        elif (goal.pos[b] == 'center' and state.pos[b] == 't1') or (goal.pos[b] == 't2' and state.pos[b] == 't1'):
+        elif (goal.pos[b] == 'center' and state.pos[b] == 't1'):
             return [('move_one', ''+b, 'center', 'left'), ('move_blocks', goal)]
-        elif (goal.pos[b] == 'center' and state.pos[b] == 't2') or (goal.pos[b] == 't1' and state.pos[b] == 't2'):
+        elif (goal.pos[b] == 'center' and state.pos[b] == 't2'):
             return [('move_one', ''+b, 'center', 'right'), ('move_blocks', goal)]
         elif goal.pos[b] == 't1' and state.pos[b] == 'center' and state.delete['t1']:
             return [('move_one', ''+b, 't1', 'left'), ('move_blocks', goal)]
         elif goal.pos[b] == 't2' and state.pos[b] == 'center'and state.delete['t2']:
             return [('move_one', ''+b, 't2', 'right'), ('move_blocks', goal)]
+        elif (goal.pos[b] == 't2' and state.pos[b] == 't1'):
+            return [('move_one', ''+b, 'center', 'left'), ('move_blocks', goal)]
+        elif (goal.pos[b] == 't1' and state.pos[b] == 't2'):
+            return [('move_one', ''+b, 'center', 'right'), ('move_blocks', goal)]
         else:
             continue
     return []
